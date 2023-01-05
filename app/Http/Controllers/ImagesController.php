@@ -33,7 +33,7 @@ class ImagesController extends Controller
         $response = OpenAI::images()->create([
             'prompt' => $prompt,
             'model' => 'image-alpha-001',
-            'size' => '512x512',
+            'size' => '1024x1024',
             'n' => $quantity,
         ]);
 
