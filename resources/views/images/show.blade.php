@@ -9,9 +9,11 @@
             <div class="my-6">
                 <span class="font-bold">Prompt: </span>{{ $prompt }}
             </div>
-            <div class="flex justify-around">
+            <div class="flex flex-wrap justify-between">
                 @foreach ($imageUrls as $i => $url)
-                    <img src="{{ $url }}" alt="Image {{ $i }}" class="object-scale-down h-48 w-96">
+                    <a href="{{ $url }}" target="_blank">
+                        <img src="{{ $url }}" alt="Image {{ $i }}" class="object-scale-down h-96">
+                    </a>
                 @endforeach
             </div>
         </div>
