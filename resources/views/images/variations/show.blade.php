@@ -3,7 +3,7 @@
         <div class="row justify-content-md-center text-gray-800">
             <div class="my-6">
                 <h2 class="text-xl">Source Image</h2>
-                <img src="{{ asset('uploads/' . $filename) }}" alt="Image" class="object-scale-down h-96">
+                <img src="{{ $sourceFileUrl }}" alt="Image" class="object-scale-down h-96">
             </div>
             <h2 class="text-xl">Generated Variations</h2>
             <div class="flex flex-wrap justify-between">
