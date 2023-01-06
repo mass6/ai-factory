@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\ImageVariationsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,13 @@ Route::get('/', function () {
 Route::view('/completions/create', 'completions.create');
 Route::post('/completions', [\App\Http\Controllers\CompletionsController::class, 'store'])->name('completions.store');
 Route::view('/drag-and-drop', 'drag-and-drop');
+
 Route::get('/images', [ImagesController::class, 'index'])->name('images.index');
 Route::get('/images/create', [ImagesController::class, 'create'])->name('images.create');
 Route::post('/images', [ImagesController::class, 'store'])->name('images.store');
+
+Route::get('/images/variations/create', [ImageVariationsController::class, 'create'])->name('images.variations.create');
+Route::post('/images/variations', [ImageVariationsController::class, 'store'])->name('images.variations.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

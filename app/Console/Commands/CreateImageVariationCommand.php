@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 use OpenAI\Laravel\Facades\OpenAI;
 
 class CreateImageVariationCommand extends Command
@@ -26,6 +25,10 @@ class CreateImageVariationCommand extends Command
         logger()->info('image variations', ['urls' => $imageUrls]);
 
         $this->info('Complete');
-        collect($imageUrls)->each(fn ($url) => $this->info($url));
+        $this->line('');
+        collect($imageUrls)->each(function ($url) {
+            $this->info($url);
+            $this->line('');
+        });
     }
 }
