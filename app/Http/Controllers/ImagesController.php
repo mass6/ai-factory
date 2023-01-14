@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\ImageCreation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -12,14 +13,12 @@ class ImagesController extends Controller
 {
     public function index(Request $request)
     {
-        $response = OpenAI::files()->list();
+        $images = Image::with('imageable')
+            ->where('imageable_type', ImageCreation::class)
+            ->latest()
+            ->paginate(15);
 
-        $logData = [];
-        foreach ($response->data as $result) {
-            $logData[] = ['id' => $result->id, 'result' => $result->object];
-        }
-        logger()->info('files', $logData);
-
+        return view('images.index')->with(['images' => $images]);
     }
 
     public function create()
@@ -33,7 +32,7 @@ class ImagesController extends Controller
     {
         $prompt = $request->input('prompt');
         $quantity = (int) $request->input('quantity', 1);
-        $size = '256x256';
+        $size = '1024x1024';
 
         /** @var ImageCreation $imageCreation */
         $imageCreation = ImageCreation::create([

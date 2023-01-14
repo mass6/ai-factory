@@ -3,6 +3,10 @@
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\ImageVariationsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
+use App\Http\Livewire\CreateVariation;
+use App\Http\Livewire\ListImages;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,19 +20,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/test', [TestController::class, 'index']);
+Route::get('lang/{lang}', ['App\Http\Controllers\LanguageController', 'switchLang'])->name('lang.switch');
+
 
 Route::view('/completions/create', 'completions.create');
 Route::post('/completions', [\App\Http\Controllers\CompletionsController::class, 'store'])->name('completions.store');
 Route::view('/drag-and-drop', 'drag-and-drop');
 
-Route::get('/images', [ImagesController::class, 'index'])->name('images.index');
+Route::get('/images', ListImages::class)->name('images.index');
 Route::get('/images/create', [ImagesController::class, 'create'])->name('images.create');
 Route::post('/images', [ImagesController::class, 'store'])->name('images.store');
 
-Route::get('/images/variations/create', [ImageVariationsController::class, 'create'])->name('images.variations.create');
+Route::get('/images/variations/create/{image?}', CreateVariation::class)->name('images.variations.create');
 Route::post('/images/variations', [ImageVariationsController::class, 'store'])->name('images.variations.store');
 
 Route::get('/dashboard', function () {

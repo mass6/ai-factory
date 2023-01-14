@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
     <div class="flex items-center justify-center mt-12">
-        <form method="post" action="/images" class="w-1/3">
+        <form method="post" action="/images" class="w-2/3">
             @csrf
-            <label for="prompt" class="block">Enter text to generate image:</label>
-            <textarea type="prompt" id="prompt" rows="3" name="prompt" class="w-full mt-2">{{ session()->get('prompt') }}</textarea>
+            <label for="prompt" class="block text-lg font-bold">Enter text to generate image:</label>
+            <textarea type="prompt" id="prompt" rows="6" name="prompt" class="w-full mt-2">{{ session()->get('prompt') }}</textarea>
             <label for="quantity" class="block mt-4">Quantity:</label>
             <select id="quantity" name="quantity" class="mt-2">
                 <option value="1">1</option>
